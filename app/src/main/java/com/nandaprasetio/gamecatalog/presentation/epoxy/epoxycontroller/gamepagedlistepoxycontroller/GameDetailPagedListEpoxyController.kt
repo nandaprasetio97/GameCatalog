@@ -1,0 +1,4 @@
+package com.nandaprasetio.gamecatalog.presentation.epoxy.epoxycontroller.gamepagedlistepoxycontroller
+
+class GameDetailPagedListEpoxyController {
+}

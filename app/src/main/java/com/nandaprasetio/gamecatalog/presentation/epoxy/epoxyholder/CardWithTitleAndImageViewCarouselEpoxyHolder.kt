@@ -1,0 +1,3 @@
+package com.nandaprasetio.gamecatalog.presentation.epoxy.epoxyholder
+
+class CardWithTitleAndImageViewCarouselEpoxyHolder : CardWithTitleAndImageViewEpoxyHolder()
