@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-abstract class BaseRecyclerViewFragment: BaseFragment<FragmentRecyclerViewBinding>() {
+abstract class BasePagingRecyclerViewFragment: BaseFragment<FragmentRecyclerViewBinding>() {
     @Inject
     lateinit var defaultErrorProvider: ErrorProvider
     @Inject

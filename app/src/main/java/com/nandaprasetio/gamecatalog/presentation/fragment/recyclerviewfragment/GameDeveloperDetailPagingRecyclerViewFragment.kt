@@ -3,22 +3,22 @@ package com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment
 import android.content.Context
 import androidx.fragment.app.viewModels
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.BaseModelValue
-import com.nandaprasetio.gamecatalog.core.presentation.viewmodel.GenreViewModel
+import com.nandaprasetio.gamecatalog.core.presentation.viewmodel.GameDeveloperViewModel
 import com.nandaprasetio.gamecatalog.core.presentation.viewmodel.PagingDataViewModel
 import com.nandaprasetio.gamecatalog.presentation.epoxy.epoxycontroller.BasePagedListEpoxyController
-import com.nandaprasetio.gamecatalog.presentation.epoxy.epoxycontroller.genrepagedlistepoxycontroller.GenrePagedListEpoxyController
+import com.nandaprasetio.gamecatalog.presentation.epoxy.epoxycontroller.gamedeveloperpagedlistepoxycontroller.GameDeveloperPagedListEpoxyController
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GenreRecyclerViewFragment: BaseRecyclerViewFragment() {
-    private val genreViewModel: GenreViewModel by viewModels()
+class GameDeveloperDetailPagingRecyclerViewFragment: BasePagingRecyclerViewFragment() {
+    private val gameDeveloperViewModel: GameDeveloperViewModel by viewModels()
 
     override fun getPagingDataViewModel(): PagingDataViewModel<*, *, *> {
-        return genreViewModel
+        return gameDeveloperViewModel
     }
 
     @Suppress("UNCHECKED_CAST")
     override fun getPagedListEpoxyController(nonNulledContext: Context): BasePagedListEpoxyController<BaseModelValue> {
-        return GenrePagedListEpoxyController(nonNulledContext, defaultErrorProvider) as BasePagedListEpoxyController<BaseModelValue>
+        return GameDeveloperPagedListEpoxyController(nonNulledContext, defaultErrorProvider) as BasePagedListEpoxyController<BaseModelValue>
     }
 }

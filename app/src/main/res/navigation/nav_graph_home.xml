@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/homeRecyclerViewFragment"
-        android:name="com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.HomeRecyclerViewFragment"
+        android:name="com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.HomePagingRecyclerViewFragment"
         android:label="HomeRecyclerViewFragment" />
 
 </navigation>

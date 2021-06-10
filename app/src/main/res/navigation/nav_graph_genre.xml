@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/genreRecyclerViewFragment"
-        android:name="com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.GenreRecyclerViewFragment"
+        android:name="com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.GenrePagingRecyclerViewFragment"
         android:label="GenreRecyclerViewFragment" />
 </navigation>
