@@ -17,7 +17,6 @@ import com.nandaprasetio.gamecatalog.core.presentation.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 abstract class BaseRecyclerViewFragment: BaseFragment<FragmentRecyclerViewBinding>() {
     @Inject
@@ -63,7 +62,7 @@ abstract class BaseRecyclerViewFragment: BaseFragment<FragmentRecyclerViewBindin
     private fun setLiveDataObserver(basedPagedListEpoxyController: BasePagedListEpoxyController<BaseModelValue>) {
         getPagingDataViewModel().apply {
             this.parallelFetchDataResultMapLiveData.observe(viewLifecycleOwner) {
-                basedPagedListEpoxyController.parallelFetchDataResultMutableList = it
+                basedPagedListEpoxyController.epoxyListParameter.parallelFetchDataResultMutableList = it
             }
             this.getPagedListLiveData().observe(viewLifecycleOwner) {
                 basedPagedListEpoxyController.submitList(it as PagedList<BaseModelValue>)
@@ -72,10 +71,10 @@ abstract class BaseRecyclerViewFragment: BaseFragment<FragmentRecyclerViewBindin
                 basedPagedListEpoxyController.requestModelBuild()
             }
             this.networkStatusLiveData.observe(viewLifecycleOwner) {
-                basedPagedListEpoxyController.loading = it <= -1
+                basedPagedListEpoxyController.epoxyListParameter.loading = it <= -1
             }
             this.errorFetchDataResultLiveData.observe(viewLifecycleOwner) {
-                basedPagedListEpoxyController.errorFetchDataResult = it
+                basedPagedListEpoxyController.epoxyListParameter.errorFetchDataResult = it
             }
         }
     }

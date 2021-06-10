@@ -39,7 +39,7 @@ class HomePagedListEpoxyController(
     override fun addModels(models: List<EpoxyModel<*>>) {
         val newModels: MutableList<EpoxyModel<*>> = mutableListOf()
 
-        parallelFetchDataResultMutableList.forEach { map ->
+        epoxyListParameter.parallelFetchDataResultMutableList.forEach { map ->
             parallelFetchDataResultModelFactory.addModel(context, map.key, this.spanCount, map.value, errorProvider)?.also {
                 newModels.addAll(it)
             }
