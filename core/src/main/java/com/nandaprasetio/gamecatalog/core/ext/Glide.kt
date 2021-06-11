@@ -23,3 +23,11 @@ fun ImageView.setImageUrl(url: String?, applyRequestBuilder: (RequestBuilder<Dra
 fun ImageView.setImageUrl(imageUrlString: ImageUrlString?, applyRequestBuilder: (RequestBuilder<Drawable>.() -> Unit)? = null) {
     setImageUrl(imageUrlString?.toString(), applyRequestBuilder)
 }
+
+fun ImageView.setImage(image: Any?, applyRequestBuilder: (RequestBuilder<Drawable>.() -> Unit)? = null) {
+    when (image) {
+        is String -> setImageUrl(image, applyRequestBuilder)
+        is ImageUrlString -> setImageUrl(image, applyRequestBuilder)
+        else -> setAnyImage(image, applyRequestBuilder)
+    }
+}
