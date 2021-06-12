@@ -16,7 +16,11 @@ class GameDeveloperDetailActivity: BaseActivity<ActivityDetailGameDeveloperBindi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.supportActionBar?.setTitle(R.string.title_game_developer_detail)
+        this.supportActionBar?.also {
+            it.setTitle(R.string.title_game_developer_detail)
+            it.setDisplayHomeAsUpEnabled(true)
+            it.setHomeButtonEnabled(true)
+        }
 
         viewBinding?.also {
             val fragmentRecyclerViewBinding = supportFragmentManager.findFragmentById(it.fragmentRecyclerViewGameDeveloperDetail.id) as GameDeveloperDetailPagingRecyclerViewFragment
