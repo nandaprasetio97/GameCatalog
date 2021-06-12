@@ -14,6 +14,10 @@ class DefaultGameDataSource @Inject constructor(
         return gameService.getGameList(page, pageSize)
     }
 
+    override fun getGameBasedGameDeveloperList(slug: String?, page: Int, pageSize: Int): Single<PagingResult<Game>> {
+        return gameService.getGameBasedGameDeveloperList(slug, page, pageSize)
+    }
+
     override fun getGameDetail(id: Int): Single<GameDetail> {
         return gameService.getGameDetail(id)
     }

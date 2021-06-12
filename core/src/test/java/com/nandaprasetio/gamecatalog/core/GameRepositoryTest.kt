@@ -42,6 +42,20 @@ class GameRepositoryTest {
     }
 
     @Test
+    fun getGameBasedGameDeveloperList_hasItem() {
+        defaultGameRepository.getGameBasedGameDeveloperList("feral-interactive", 1, 10)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .test()
+            .assertValue {
+                it.result.forEach { game ->
+                    println("${game.name}, ${game.slug} ")
+                }
+                it.result.isNotEmpty()
+            }
+    }
+
+    @Test
     fun getGameDetail_isItemExists() {
         defaultGameRepository.getGameDetail(3498)
             .subscribeOn(Schedulers.io())

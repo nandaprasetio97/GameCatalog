@@ -16,6 +16,13 @@ interface GameService {
         @Query("page_size") pageSize: Int,
     ): Single<PagingResult<Game>>
 
+    @GET("games?key=${BuildConfig.API_KEY}")
+    fun getGameBasedGameDeveloperList(
+        @Query("developers") developersSlug: String?,
+        @Query("page") page: Int,
+        @Query("page_size") pageSize: Int,
+    ): Single<PagingResult<Game>>
+
     @GET("games/{id}?key=${BuildConfig.API_KEY}")
     fun getGameDetail(
         @Path("id") id: Int
