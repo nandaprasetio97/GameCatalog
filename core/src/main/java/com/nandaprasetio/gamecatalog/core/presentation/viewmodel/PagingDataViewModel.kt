@@ -10,6 +10,7 @@ import com.nandaprasetio.gamecatalog.core.domain.entity.result.FetchDataResult
 import com.nandaprasetio.gamecatalog.core.domain.entity.result.pagingresult.PagingResult
 import com.nandaprasetio.gamecatalog.core.presentation.ParallelMutableLiveData
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.BaseModelValue
+import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.compoundmodelvalue.CombinationWithItemModelValue
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.compoundmodelvalue.carouselmodelvalue.CarouselModelValue
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.itemmodelvalue.BaseItemModelValue
 import io.reactivex.disposables.CompositeDisposable
@@ -63,6 +64,22 @@ abstract class PagingDataViewModel<Key, Value, DS: DataSource<Key, Value>>: View
         }, {
             carouselModelValue.fetchDataResult = FetchDataResult.Error(it)
             parallelFetchDataResultOnFinishedMutableLiveData.postValue(carouselModelValue)
+        })
+    }
+
+    protected fun<I, O: BaseItemModelValue> parallelingFetchDataToItem(
+        key: String,
+        onFetchData: (Consumer<I>, Consumer<Throwable>) -> Unit,
+        onMappingToItemModelValue: (I) -> O
+    ) {
+        val combinationWithItemModelValue: CombinationWithItemModelValue<O> = CombinationWithItemModelValue(null)
+        parallelFetchDataResultMap[key] = combinationWithItemModelValue
+        onFetchData({
+            combinationWithItemModelValue.fetchDataResult = FetchDataResult.Success(onMappingToItemModelValue(it))
+            parallelFetchDataResultOnFinishedMutableLiveData.postValue(combinationWithItemModelValue)
+        }, {
+            combinationWithItemModelValue.fetchDataResult = FetchDataResult.Error(it)
+            parallelFetchDataResultOnFinishedMutableLiveData.postValue(combinationWithItemModelValue)
         })
     }
 
