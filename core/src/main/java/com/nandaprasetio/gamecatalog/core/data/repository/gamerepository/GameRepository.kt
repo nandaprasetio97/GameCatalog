@@ -8,5 +8,6 @@ import io.reactivex.Single
 interface GameRepository {
     fun getGameList(page: Int, pageSize: Int): Single<PagingResult<Game>>
     fun getGameBasedGameDeveloperList(slug: String?, page: Int, pageSize: Int): Single<PagingResult<Game>>
+    fun getGameBasedGenreList(slug: String?, page: Int, pageSize: Int): Single<PagingResult<Game>>
     fun getGameDetail(id: Int): Single<GameDetail>
 }

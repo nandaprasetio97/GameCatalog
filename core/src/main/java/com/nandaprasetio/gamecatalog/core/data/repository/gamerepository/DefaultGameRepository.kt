@@ -18,6 +18,10 @@ class DefaultGameRepository @Inject constructor(
         return gameDataSource.getGameBasedGameDeveloperList(slug, page, pageSize)
     }
 
+    override fun getGameBasedGenreList(slug: String?, page: Int, pageSize: Int): Single<PagingResult<Game>> {
+        return gameDataSource.getGameBasedGenreList(slug, page, pageSize)
+    }
+
     override fun getGameDetail(id: Int): Single<GameDetail> {
         return gameDataSource.getGameDetail(id)
     }
