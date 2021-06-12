@@ -10,6 +10,8 @@ import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedeveloperusecase.De
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedeveloperusecase.GameDeveloperUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gameusecase.DefaultGameUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gameusecase.GameUseCase
+import com.nandaprasetio.gamecatalog.core.domain.usecase.genredetailusecase.DefaultGenreDetailUseCase
+import com.nandaprasetio.gamecatalog.core.domain.usecase.genredetailusecase.GenreDetailUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.genreusecase.DefaultGenreUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.genreusecase.GenreUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.storeusecase.DefaultStoreUseCase
@@ -48,6 +50,10 @@ abstract class UseCaseModule {
     @Binds
     @ViewModelScoped
     abstract fun provideDefaultGenreUseCase(defaultGenreUseCase: DefaultGenreUseCase): GenreUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun provideDefaultGenreDetailUseCase(defaultGenreDetailUseCase: DefaultGenreDetailUseCase): GenreDetailUseCase
 
     @Binds
     @ViewModelScoped

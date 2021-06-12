@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.nandaprasetio.gamecatalog.presentation.activity.GameDeveloperDetailActivity" />
+        <activity android:name="com.nandaprasetio.gamecatalog.presentation.activity.GenreDetailActivity" />
     </application>
 
 </manifest>
