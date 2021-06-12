@@ -1,6 +1,7 @@
 package com.nandaprasetio.gamecatalog.presentation.activity
 
 import android.os.Bundle
+import com.nandaprasetio.gamecatalog.R
 import com.nandaprasetio.gamecatalog.core.presentation.activity.BaseActivity
 import com.nandaprasetio.gamecatalog.databinding.ActivityDetailGameDeveloperBinding
 import com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.GameDeveloperDetailPagingRecyclerViewFragment
@@ -15,6 +16,8 @@ class GameDeveloperDetailActivity: BaseActivity<ActivityDetailGameDeveloperBindi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.supportActionBar?.setTitle(R.string.title_game_developer_detail)
+
         viewBinding?.also {
             val fragmentRecyclerViewBinding = supportFragmentManager.findFragmentById(it.fragmentRecyclerViewGameDeveloperDetail.id) as GameDeveloperDetailPagingRecyclerViewFragment
             fragmentRecyclerViewBinding.arguments = Bundle().apply {

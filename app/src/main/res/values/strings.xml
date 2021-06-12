@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_genre">Genre</string>
     <string name="title_developer">Developer</string>
+    <string name="title_genre_detail">Genre Detail</string>
+    <string name="title_game_developer_detail">Developer Detail</string>
+    <string name="title_game_detail">Game Detail</string>
 </resources>
