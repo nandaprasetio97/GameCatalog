@@ -7,14 +7,10 @@ import com.nandaprasetio.gamecatalog.databinding.ActivityDetailGameBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GameDetailActivity: BaseActivity<ActivityDetailGameBinding>() {
+class GameDetailActivity: BaseActivity<ActivityDetailGameBinding>(true) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.supportActionBar?.also {
-            it.setTitle(R.string.title_game_detail)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeButtonEnabled(true)
-        }
+        this.supportActionBar?.setTitle(R.string.title_game_detail)
     }
 
     override fun setViewBinding(): ActivityDetailGameBinding {

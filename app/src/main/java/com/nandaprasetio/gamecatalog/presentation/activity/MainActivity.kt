@@ -9,7 +9,7 @@ import com.nandaprasetio.gamecatalog.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity: BaseActivity<ActivityMainBinding>() {
+class MainActivity: BaseActivity<ActivityMainBinding>(false) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

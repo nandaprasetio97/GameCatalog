@@ -8,7 +8,7 @@ import com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GameDeveloperDetailActivity: BaseActivity<ActivityDetailGameDeveloperBinding>() {
+class GameDeveloperDetailActivity: BaseActivity<ActivityDetailGameDeveloperBinding>(true) {
     companion object {
         const val ARGUMENT_GAME_DEVELOPER_SLUG = "argument.GAME_DEVELOPER_SLUG"
         const val ARGUMENT_GAME_DEVELOPER_ID = "argument.GAME_DEVELOPER_ID"
@@ -16,11 +16,7 @@ class GameDeveloperDetailActivity: BaseActivity<ActivityDetailGameDeveloperBindi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.supportActionBar?.also {
-            it.setTitle(R.string.title_game_developer_detail)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeButtonEnabled(true)
-        }
+        this.supportActionBar?.setTitle(R.string.title_game_developer_detail)
 
         viewBinding?.also {
             val fragmentRecyclerViewBinding = supportFragmentManager.findFragmentById(it.fragmentRecyclerViewGameDeveloperDetail.id) as GameDeveloperDetailPagingRecyclerViewFragment

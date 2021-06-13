@@ -8,7 +8,7 @@ import com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment.
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GenreDetailActivity: BaseActivity<ActivityDetailGenreBinding>() {
+class GenreDetailActivity: BaseActivity<ActivityDetailGenreBinding>(true) {
     companion object {
         const val ARGUMENT_GENRE_SLUG = "argument.GENRE_SLUG"
         const val ARGUMENT_GENRE_ID = "argument.GENRE_ID"
@@ -16,11 +16,6 @@ class GenreDetailActivity: BaseActivity<ActivityDetailGenreBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.supportActionBar?.also {
-            it.setTitle(R.string.title_genre_detail)
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeButtonEnabled(true)
-        }
 
         viewBinding?.also {
             val fragmentRecyclerViewBinding = supportFragmentManager.findFragmentById(it.fragmentRecyclerViewGenreDetail.id) as GenreDetailPagingRecyclerViewFragment
