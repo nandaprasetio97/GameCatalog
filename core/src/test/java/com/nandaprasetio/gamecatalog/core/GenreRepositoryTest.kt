@@ -41,7 +41,7 @@ class GenreRepositoryTest {
 
     @Test
     fun getGenreDetail_isItemExists() {
-        defaultGenreRepository.getGenreDetail(70)
+        defaultGenreRepository.getGenreDetail(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .test()

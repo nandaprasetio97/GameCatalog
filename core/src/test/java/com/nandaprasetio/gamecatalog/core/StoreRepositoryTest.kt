@@ -43,7 +43,7 @@ class StoreRepositoryTest {
 
     @Test
     fun getStoreDetail_isItemExists() {
-        defaultStoreRepository.getStoreDetail(70)
+        defaultStoreRepository.getStoreDetail(1)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .test()
