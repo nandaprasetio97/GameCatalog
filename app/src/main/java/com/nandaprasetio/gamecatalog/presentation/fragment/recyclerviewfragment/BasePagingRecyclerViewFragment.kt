@@ -30,46 +30,22 @@ abstract class BasePagingRecyclerViewFragment: BaseFragment<FragmentRecyclerView
 
     abstract fun getPagingDataViewModel(): PagingDataViewModel<*, *, *>
 
-    abstract fun getPagedListEpoxyController(nonNulledContext: Context): BasePagedListEpoxyController<BaseModelValue>
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        val nonNulledContext = this.context ?: throw IllegalStateException("Context cannot be null.")
-
-        val basePagedListEpoxyController: BasePagedListEpoxyController<BaseModelValue> = getPagedListEpoxyController(
-            nonNulledContext
-        )
-        return viewBinding?.apply {
-            this.epoxyRecyclerViewContent.itemAnimator = null
-            this.epoxyRecyclerViewContent.setController(basePagedListEpoxyController)
-            this.epoxyRecyclerViewContent.layoutManager = GridLayoutManager(nonNulledContext, 2).also {
-                it.spanSizeLookup = basePagedListEpoxyController.spanSizeLookup
-            }
-            this.epoxyRecyclerViewContent.setItemSpacingDp(16)
-            this.swipeRefreshLayoutContent.setOnRefreshListener {
-                this.swipeRefreshLayoutContent.isRefreshing = false
-                getPagingDataViewModel().refresh()
+    @Suppress("UNCHECKED_CAST")
+    override fun onAfterSetParallelFetchDataResultMapObserver(epoxyController: EpoxyController) {
+        if (epoxyController is BasePagedListEpoxyController<*>) {
+            getPagingDataViewModel().apply {
+                this.getPagedListLiveData().observe(viewLifecycleOwner) {
+                    (epoxyController as BasePagedListEpoxyController<BaseModelValue>).submitList(it as PagedList<BaseModelValue>)
+                }
             }
             setLiveDataObserver(basePagedListEpoxyController)
         }?.root
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun setLiveDataObserver(basedPagedListEpoxyController: BasePagedListEpoxyController<BaseModelValue>) {
+    override fun onAfterSetParallelFetchDataResultOnFinishedObserver(epoxyController: EpoxyController) {
+        val basedPagedListEpoxyController = epoxyController as BasePagedListEpoxyController<BaseModelValue>
         getPagingDataViewModel().apply {
-            this.parallelFetchDataResultMapLiveData.observe(viewLifecycleOwner) {
-                basedPagedListEpoxyController.epoxyListParameter.parallelFetchDataResultMutableList = it
-            }
-            this.getPagedListLiveData().observe(viewLifecycleOwner) {
-                basedPagedListEpoxyController.submitList(it as PagedList<BaseModelValue>)
-            }
-            this.parallelFetchDataResultOnFinishedLiveData.observe(viewLifecycleOwner) {
-                basedPagedListEpoxyController.requestModelBuild()
-            }
             this.networkStatusLiveData.observe(viewLifecycleOwner) {
                 basedPagedListEpoxyController.epoxyListParameter.loading = it <= -1
             }
