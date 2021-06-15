@@ -1,5 +1,6 @@
 package com.nandaprasetio.gamecatalog.core.domain.entity.game
 
+import com.google.gson.annotations.SerializedName
 import com.nandaprasetio.gamecatalog.core.domain.entity.*
 import com.nandaprasetio.gamecatalog.core.domain.entity.genre.GenreShortInfo
 import com.nandaprasetio.gamecatalog.core.domain.entity.platform.PlatformGameInfo
@@ -11,6 +12,8 @@ class GameDetail(
     id: Int,
     slug: String?,
     name: String?,
+    @SerializedName("description")
+    val description: String?,
     released: String?,
     tba: Boolean,
     backgroundImage: String?,
