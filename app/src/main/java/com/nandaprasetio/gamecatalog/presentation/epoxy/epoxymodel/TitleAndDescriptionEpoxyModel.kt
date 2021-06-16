@@ -1,5 +1,8 @@
 package com.nandaprasetio.gamecatalog.presentation.epoxy.epoxymodel
 
+import android.os.Build
+import android.text.Html
+import androidx.core.text.parseAsHtml
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -14,6 +17,9 @@ abstract class TitleAndDescriptionEpoxyModel: EpoxyModelWithHolder<TitleAndDescr
     @EpoxyAttribute
     var description: String? = null
 
+    @EpoxyAttribute
+    var readHtmlIntoDescription: Boolean = false
+
     override fun getDefaultLayout(): Int {
         return R.layout.item_title_and_description
     }
@@ -21,6 +27,14 @@ abstract class TitleAndDescriptionEpoxyModel: EpoxyModelWithHolder<TitleAndDescr
     override fun bind(holder: TitleAndDescriptionEpoxyHolder) {
         super.bind(holder)
         holder.titleTextView.text = title
-        holder.descriptionTextView.text = description
+        holder.descriptionTextView.text = if (readHtmlIntoDescription) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                description?.parseAsHtml(Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                description?.parseAsHtml()
+            }
+        } else {
+            description
+        }
     }
 }

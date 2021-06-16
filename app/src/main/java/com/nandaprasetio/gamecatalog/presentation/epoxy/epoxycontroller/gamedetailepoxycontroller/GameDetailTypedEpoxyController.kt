@@ -1,6 +1,7 @@
 package com.nandaprasetio.gamecatalog.presentation.epoxy.epoxycontroller.gamedetailepoxycontroller
 
 import android.content.Context
+import android.os.Build
 import com.airbnb.epoxy.EpoxyModel
 import com.nandaprasetio.gamecatalog.core.domain.entity.imageurlstring.toImageUrlString
 import com.nandaprasetio.gamecatalog.core.domain.entity.result.FetchDataResult
@@ -46,6 +47,7 @@ class GameDetailTypedEpoxyController(
                                         TitleAndDescriptionEpoxyModel_().id("game-detail-title-and-description")
                                             .title(it.name)
                                             .description(it.description)
+                                            .readHtmlIntoDescription(true)
                                             .spanSizeOverride { _, _, _, -> spanCount },
                                         SeparatorEpoxyModel_().id("game-detail-title-and-description-separator")
                                             .spanSizeOverride { _, _, _, -> spanCount },
@@ -63,7 +65,6 @@ class GameDetailTypedEpoxyController(
                         )
                     }
                     null -> {
-                        println("Boleh juga hehe")
                         epoxyModelMutableList.addAll(
                             listOf(
                                 ImagePlaceholderEpoxyModel_().id("game-detail-image-placeholder")
