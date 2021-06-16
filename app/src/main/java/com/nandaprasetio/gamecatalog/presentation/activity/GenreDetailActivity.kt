@@ -16,6 +16,7 @@ class GenreDetailActivity: BaseActivity<ActivityDetailGenreBinding>(true) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.supportActionBar?.setTitle(R.string.title_genre_detail)
 
         viewBinding?.also {
             val fragmentRecyclerViewBinding = supportFragmentManager.findFragmentById(it.fragmentRecyclerViewGenreDetail.id) as GenreDetailPagingRecyclerViewFragment
