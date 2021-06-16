@@ -1,5 +1,6 @@
 package com.nandaprasetio.gamecatalog.presentation.epoxy.epoxymodel.gameepoxymodel
 
+import android.content.Intent
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
@@ -7,6 +8,7 @@ import com.nandaprasetio.gamecatalog.R
 import com.nandaprasetio.gamecatalog.core.domain.entity.game.Game
 import com.nandaprasetio.gamecatalog.core.domain.entity.imageurlstring.toImageUrlString
 import com.nandaprasetio.gamecatalog.core.ext.setImageUrl
+import com.nandaprasetio.gamecatalog.presentation.activity.GameDetailActivity
 import com.nandaprasetio.gamecatalog.presentation.epoxy.epoxyholder.GameEpoxyHolder
 import com.nandaprasetio.gamecatalog.presentation.epoxy.epoxymodel.ItemEpoxyModel
 
@@ -24,8 +26,13 @@ abstract class GameEpoxyModel: EpoxyModelWithHolder<GameEpoxyHolder>(), ItemEpox
             holder.titleTextView.text = it.name
             holder.releaseDateTextView.text = it.released
             holder.gameImageView.setImageUrl(it.backgroundImage?.toImageUrlString())
-            holder.containerCardView.setOnClickListener {
-
+            holder.containerCardView.setOnClickListener { view ->
+                view.context.also { context ->
+                    Intent(context, GameDetailActivity::class.java).also { intent ->
+                        intent.putExtra(GameDetailActivity.ARGUMENT_GAME_ID, it.id)
+                        context.startActivity(intent)
+                    }
+                }
             }
         }
     }

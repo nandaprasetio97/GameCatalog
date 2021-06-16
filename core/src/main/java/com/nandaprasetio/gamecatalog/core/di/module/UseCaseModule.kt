@@ -4,6 +4,8 @@ import com.nandaprasetio.gamecatalog.core.domain.usecase.creatorroleusecase.Crea
 import com.nandaprasetio.gamecatalog.core.domain.usecase.creatorroleusecase.DefaultCreatorRoleUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamecreatorusecase.DefaultGameCreatorUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamecreatorusecase.GameCreatorUseCase
+import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedetailusecase.DefaultGameDetailUseCase
+import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedetailusecase.GameDetailUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedeveloperdetailusecase.DefaultGameDeveloperDetailUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedeveloperdetailusecase.GameDeveloperDetailUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedeveloperusecase.DefaultGameDeveloperUseCase
@@ -42,6 +44,10 @@ abstract class UseCaseModule {
     @Binds
     @ViewModelScoped
     abstract fun provideDefaultGameDeveloperUseCase(defaultGameDeveloperUseCase: DefaultGameDeveloperUseCase): GameDeveloperUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun provideDefaultGameDetailUseCase(defaultGameDetailUseCase: DefaultGameDetailUseCase): GameDetailUseCase
 
     @Binds
     @ViewModelScoped
