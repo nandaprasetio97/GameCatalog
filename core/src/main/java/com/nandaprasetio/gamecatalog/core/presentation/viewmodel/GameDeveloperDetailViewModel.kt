@@ -53,4 +53,8 @@ class GameDeveloperDetailViewModel @Inject constructor(
             }, { GameDeveloperDetailItemModelValue(it) }
         )
     }
+
+    override fun onRefreshInPagingData() {
+        loadGameDeveloperDetail()
+    }
 }
