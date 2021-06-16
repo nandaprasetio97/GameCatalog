@@ -1,32 +1,31 @@
 package com.nandaprasetio.gamecatalog.presentation.fragment.recyclerviewfragment
 
 import android.content.Context
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.paging.PagedList
-import androidx.recyclerview.widget.GridLayoutManager
-import com.nandaprasetio.gamecatalog.core.presentation.ParallelFetchDataResultModelFactory
-import com.nandaprasetio.gamecatalog.core.presentation.errorprovider.ErrorProvider
+import com.airbnb.epoxy.EpoxyController
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.BaseModelValue
 import com.nandaprasetio.gamecatalog.core.presentation.viewmodel.PagingDataViewModel
+import com.nandaprasetio.gamecatalog.core.presentation.viewmodel.ParallelLoadingDataViewModel
 import com.nandaprasetio.gamecatalog.databinding.FragmentRecyclerViewBinding
+import com.nandaprasetio.gamecatalog.presentation.epoxy.WithListParameterEpoxyController
 import com.nandaprasetio.gamecatalog.presentation.epoxy.epoxycontroller.BasePagedListEpoxyController
-import com.nandaprasetio.gamecatalog.core.presentation.fragment.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-abstract class BasePagingRecyclerViewFragment: BaseFragment<FragmentRecyclerViewBinding>() {
-    @Inject
-    lateinit var defaultErrorProvider: ErrorProvider
-    @Inject
-    lateinit var defaultParallelFetchDataResultModelFactory: ParallelFetchDataResultModelFactory
-
+abstract class BasePagingRecyclerViewFragment: BaseParallelLoadingRecyclerViewFragment() {
     override fun setViewBinding(): FragmentRecyclerViewBinding {
         return FragmentRecyclerViewBinding.inflate(this.layoutInflater)
     }
+
+    override fun getParallelLoadingDataViewModel(): ParallelLoadingDataViewModel {
+        return getPagingDataViewModel()
+    }
+
+    override fun getWithListParameterEpoxyController(nonNulledContext: Context): WithListParameterEpoxyController {
+        return getPagedListEpoxyController(nonNulledContext)
+    }
+
+    abstract fun getPagedListEpoxyController(nonNulledContext: Context): BasePagedListEpoxyController<BaseModelValue>
 
     abstract fun getPagingDataViewModel(): PagingDataViewModel<*, *, *>
 
@@ -38,8 +37,7 @@ abstract class BasePagingRecyclerViewFragment: BaseFragment<FragmentRecyclerView
                     (epoxyController as BasePagedListEpoxyController<BaseModelValue>).submitList(it as PagedList<BaseModelValue>)
                 }
             }
-            setLiveDataObserver(basePagedListEpoxyController)
-        }?.root
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
