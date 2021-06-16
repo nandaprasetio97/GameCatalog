@@ -1,22 +1,16 @@
 package com.nandaprasetio.gamecatalog.core.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.paging.DataSource
 import androidx.paging.LivePagedListBuilder
-import androidx.paging.PageKeyedDataSource
 import androidx.paging.PagedList
 import com.nandaprasetio.gamecatalog.core.data.datasource.paging.gamepagingdatasource.GamePagingDataSource
 import com.nandaprasetio.gamecatalog.core.domain.entity.game.Game
 import com.nandaprasetio.gamecatalog.core.domain.entity.gamedeveloper.GameDeveloper
 import com.nandaprasetio.gamecatalog.core.domain.entity.genre.Genre
 import com.nandaprasetio.gamecatalog.core.domain.entity.result.pagingresult.PagingResult
-import com.nandaprasetio.gamecatalog.core.domain.usecase.gamecreatorusecase.GameCreatorUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gamedeveloperusecase.GameDeveloperUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.gameusecase.GameUseCase
 import com.nandaprasetio.gamecatalog.core.domain.usecase.genreusecase.GenreUseCase
-import com.nandaprasetio.gamecatalog.core.domain.usecase.storeusecase.StoreUseCase
-import com.nandaprasetio.gamecatalog.core.domain.usecase.tagusecase.TagUseCase
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.BaseModelValue
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.itemmodelvalue.GameDeveloperItemModelValue
 import com.nandaprasetio.gamecatalog.core.presentation.modelvalue.itemmodelvalue.GameItemModelValue
@@ -27,11 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val gameUseCase: GameUseCase,
-    private val gameCreatorUseCase: GameCreatorUseCase,
     private val gameDeveloperUseCase: GameDeveloperUseCase,
-    private val genreUseCase: GenreUseCase,
-    private val storeUseCase: StoreUseCase,
-    private val tagUseCase: TagUseCase
+    private val genreUseCase: GenreUseCase
 ): PagingDataViewModel<Int, Game, GamePagingDataSource>() {
     private val gameDeveloperPagedListLiveData: LiveData<PagedList<GameItemModelValue>> = LivePagedListBuilder(
         gameUseCase.getGameDataSourceFactory(
@@ -80,7 +71,7 @@ class HomeViewModel @Inject constructor(
         )
     }
 
-    override fun onRefresh() {
+    override fun onRefreshInPagingData() {
         loadGame()
     }
 }
