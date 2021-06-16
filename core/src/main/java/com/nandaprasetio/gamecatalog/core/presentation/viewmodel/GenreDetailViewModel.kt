@@ -52,4 +52,8 @@ class GenreDetailViewModel @Inject constructor(
             }, { GenreDetailItemModelValue(it) }
         )
     }
+
+    override fun onRefreshInPagingData() {
+        loadGenreDetail()
+    }
 }
